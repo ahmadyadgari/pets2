@@ -27,9 +27,11 @@ $f3->route('GET /', function() {
 
 // Order Form
 $f3->route('GET|POST /order', function($f3) {
-    // Check if the form has been posted
+
+    //Check if the form has been posted
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Capture form data and store it in an array
+
+        //Get the data
         $petData = [
             'petType' => $f3->get('POST.petType'),
             'breedType' => $f3->get('POST.breedType'),
@@ -38,19 +40,22 @@ $f3->route('GET|POST /order', function($f3) {
             'petGender' => $f3->get('POST.petGender')
         ];
 
-        // Store the pet data in the session
-        $f3->set('SESSION.petData', $petData);
+        //Validate the data
+        if (empty($petData)) {
 
-        // Redirect to the summary route
-        $f3->reroute("/summary");
-    } else {
+            //Data is invalid
+            echo "Please supply a pet type";
+        } else {
+            //Data is valid
+            $f3->set('SESSION.petData', $petData);
 
-        // Render a view page if not a POST request
-        $view = new Template();
-        echo $view->render('views/order.html');
+            //Redirect to the summary route
+            $f3->reroute("summary");
+        }
     }
+    $view = new Template();
+    echo $view->render('views/pet-order.html');
 });
-
 
 // Summary Page
 $f3->route('GET /summary', function($f3) {
