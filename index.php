@@ -44,6 +44,7 @@ $f3->route('GET|POST /order', function($f3) {
         // Redirect to the summary route
         $f3->reroute("/summary");
     } else {
+
         // Render a view page if not a POST request
         $view = new Template();
         echo $view->render('views/order.html');
@@ -53,6 +54,8 @@ $f3->route('GET|POST /order', function($f3) {
 
 // Summary Page
 $f3->route('GET /summary', function($f3) {
+
+    // Render a view page
     $view = new Template();
     echo $view->render('views/summary.html');
 });
