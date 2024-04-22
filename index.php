@@ -54,11 +54,11 @@ $f3->route('GET|POST /order', function($f3) {
         }
     }
     $view = new Template();
-    echo $view->render('views/pet-order.html');
+    echo $view->render('views/order.html');
 });
 
 // Summary Page
-$f3->route('GET /summary', function($f3) {
+$f3->route('GET /summary', function() {
 
     // Render a view page
     $view = new Template();
