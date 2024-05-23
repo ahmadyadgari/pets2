@@ -1,13 +1,22 @@
 {
-  "name": "ayadgari/328/Week3/pets2",
+  "name": "ayadgari/328/Week7/pets3",
   "authors": [
     {
-      "name": "Ahmad Reshad Yadgarir",
+      "name": "Ahmad Reshad Yadgari",
       "email": "yadgari.ahmadreshad@student.greenriver.edu"
+    },
+    {
+      "name": "Blake Hansen",
+      "email": "hansen.blake@student.greenriver.edu"
     }
   ],
   "require":
   {
     "bcosca/fatfree-core": "dev-master"
+  },
+  "autoload":
+  {
+    "classmap": ["classes/" ]
   }
+
 }
