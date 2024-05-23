@@ -1,17 +1,30 @@
-<!---  328/Week3/pets2/views/summary.html
-       Author: Ahmad Reshad Yadgari 04/20/2024--->
+<!---  328/Week7/pets3/pets2/views/summary.html
+       Author: Ahmad Reshad Yadgari 05/20/2024--->
 
+<!doctype html>
+<html lang="en">
 <include href="views/header.html"></include>
-
 <body>
 <div class="container mt-5">
-    <h1>Thank you! and here is summary of Your Pet Order</h1><br>
+    <h1>Thank you! Here is the summary of your pet order</h1><br>
     <div>
-        <p>Pet Type: {{ @SESSION.petData['petType'] }}</p>
-        <p>Breed Type: {{ @SESSION.petData['breedType'] }}</p>
-        <p>Pet Age: {{ @SESSION.petData['petAge'] }}</p>
-        <p>Pet Color: {{ @SESSION.petData['petColor'] }}</p>
-        <p>Pet Gender: {{ @SESSION.petData['petGender'] }}</p>
+        <p>Pet Type: {{ @SESSION.pet->getAnimal() }}</p>
+        <p>Pet Color: {{ @SESSION.pet->getColor() }}</p>
+
+        <check if="{{ @SESSION.pet instanceof RoboticPet }}">
+            <true>
+                <p>Accessories:
+                    <repeat group="{{ @SESSION.pet->getAccessories() }}" value="{{ @accessory }}">
+                        {{ @accessory }},
+                    </repeat>
+                </p>
+            </true>
+            <false>
+                <p>Size: {{ @SESSION.pet->getSize() }}</p>
+                <p>Stuffing Type: {{ @SESSION.pet->getStuffingType() }}</p>
+                <p>Material: {{ @SESSION.pet->getMaterial() }}</p>
+            </false>
+        </check>
     </div>
     <a href="{{ @BASE }}">Return to Home page</a>
 </div>

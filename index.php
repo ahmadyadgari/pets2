@@ -27,42 +27,34 @@ $f3->route('GET /', function() {
 
 // Order Form
 $f3->route('GET|POST /order', function($f3) {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Get the data from the form
+        $typeOfPet = $f3->get('POST.typeOfPet');
 
-    //Check if the form has been posted
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Store the type in the session
+        $f3->set('SESSION.typeOfPet', $typeOfPet);
 
-        //Get the data
-        $petData = [
-            'petType' => $f3->get('POST.petType'),
-            'breedType' => $f3->get('POST.breedType'),
-            'petAge' => $f3->get('POST.petAge'),
-            'petColor' => $f3->get('POST.petColor'),
-            'petGender' => $f3->get('POST.petGender')
-        ];
-
-        //Validate the data
-        if (empty($petData)) {
-
-            //Data is invalid
-            echo "Please supply a pet type";
-        } else {
-            //Data is valid
-            $f3->set('SESSION.petData', $petData);
-
-            //Redirect to the summary route
-            $f3->reroute("summary");
-        }
+        // Redirect to the customization page
+        $f3->reroute('/petType');
     }
     $view = new Template();
     echo $view->render('views/order.html');
 });
 
-// Summary Page
-$f3->route('GET /summary', function() {
-
-    // Render a view page
+// Customization Page
+$f3->route('GET|POST /petType', function($f3) {
     $view = new Template();
-    echo $view->render('views/summary.html');
+    echo $view->render('views/petType.html');
+});
+
+// Summary Page
+$f3->route('GET|POST /summary', function($f3) {
+    // Retrieve the pet object from the session
+    $pet = $f3->get('SESSION.pet');
+
+    // Render the summary view, passing the pet object to the view
+    $view = new Template();
+    echo $view->render('views/summary.html', ['pet' => $pet]);
 });
 
 

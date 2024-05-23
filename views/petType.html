@@ -1,0 +1,60 @@
+<!--- Pets Order Page
+    328/Week7/pets3/pets2/views/petType.html
+    Author: Ahmad Reshad Yadgari 05/20/2024--->
+<!doctype html>
+<html lang="en">
+<include href="views/header.html"></include>
+<body>
+<div class="container mt-5">
+    <h1>Customize Your Pet</h1>
+    <form action="summary" method="post">
+        <check if="{{ @SESSION.typeOfPet == 'robotic' }}">
+            <true>
+                <h3>Select Accessories for Your Robotic Pet:</h3>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="accessories[]" value="Extra Battery Packs" id="battery">
+                    <label class="form-check-label" for="battery">Extra Battery Packs</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="accessories[]" value="Charging Dock/Station" id="chargingDock">
+                    <label class="form-check-label" for="chargingDock">Charging Dock/Station</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="accessories[]" value="Voice Module" id="voiceModule">
+                    <label class="form-check-label" for="voiceModule">Voice Module</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="accessories[]" value="Camera Attachment" id="cameraAttachment">
+                    <label class="form-check-label" for="cameraAttachment">Camera Attachment</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="accessories[]" value="Remote Control" id="remoteControl">
+                    <label class="form-check-label" for="remoteControl">Remote Control</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="accessories[]" value="Custom Skins" id="customSkins">
+                    <label class="form-check-label" for="customSkins">Custom Skins</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="accessories[]" value="Bluetooth Speaker Module" id="bluetoothSpeaker">
+                    <label class="form-check-label" for="bluetoothSpeaker">Bluetooth Speaker Module</label>
+                </div>
+            </true>
+            <false>
+                <h3>Choose Specifications for Your Stuffed Pet:</h3>
+                <div class="form-group">
+                    <label for="size">Size:</label>
+                    <select class="form-control" id="size" name="size">
+                        <option>Small</option>
+                        <option>Medium</option>
+                        <option>Large</option>
+                    </select>
+                </div>
+                <!-- Add more selections for material or stuffing type -->
+            </false>
+        </check>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>
