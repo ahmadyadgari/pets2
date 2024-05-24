@@ -10,60 +10,109 @@ error_reporting(E_ALL);
 // Require the autoload file
 require_once ('vendor/autoload.php');
 
-// Instantiate the F3 Base class
+// Class files here
+require_once('classes/Pet.php');
+require_once('classes/RoboticPet.php');
+require_once('classes/StuffedPet.php');
+
+// Instantiate the F3 Base
 $f3 = Base::instance();
 
-// Define a default route
-$f3->route('GET /', function() {
+// Default route
+$f3->route('GET /', function($f3) {
     $view = new Template();
     echo $view->render('views/home-page.html');
 });
 
 // Order Form route
 $f3->route('GET|POST /order', function($f3) {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Retrieve and sanitize the type of pet from the form submission
-        $typeOfPet = filter_var($f3->get('POST.typeOfPet'), FILTER_SANITIZE_STRING);
 
-        // Ensure the type of pet is not empty
-        if (empty($typeOfPet)) {
-            // Display an error message or redirect back to the form with an error
-            $f3->set('error', 'Please select a type of pet.');
-            $view = new Template();
-            echo $view->render('views/order.html');
-            return;
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Retrieve
+        $typeOfPet = filter_var($f3->get('POST.typeOfPet'));
+        $animal = filter_var($f3->get('POST.petType'));
+        $color = filter_var($f3->get('POST.petColor'));
+        $age = filter_var($f3->get('POST.petAge'));
+
+        // Check if not empty
+        if (empty($typeOfPet) || empty($animal) || empty($color)) {
+            echo "Please fill in all required fields.";
+            return;  // Stop
         }
 
-        // Store the type in the session and redirect to the customization page
+        // Store
         $f3->set('SESSION.typeOfPet', $typeOfPet);
-        $f3->reroute('/petType');
+        $f3->set('SESSION.animal', $animal);
+        $f3->set('SESSION.color', $color);
+        $f3->set('SESSION.age', $age);
+
+        // Redirect
+        if ($typeOfPet == 'robotic') {
+            $f3->reroute('/robotic');
+        } elseif ($typeOfPet == 'stuffed') {
+            $f3->reroute('/stuffed');
+        }
     } else {
-        // Just render the order form if it's a GET request
         $view = new Template();
         echo $view->render('views/order.html');
     }
 });
 
-// petType route
-$f3->route('GET|POST /petType', function($f3) {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// Robotic Pets page
+$f3->route('GET|POST /robotic', function($f3) {
 
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Retrieve
+        $accessories = $f3->get('POST.accessories');
+
+        // Create RoboticPet object and store it in session
+        $roboticPet = new RoboticPet($f3->get('SESSION.animal'), $f3->get('SESSION.color'));
+        if ($accessories) {
+            foreach ($accessories as $accessory) {
+                $roboticPet->addAccessory($accessory);
+            }
+        }
+
+        $f3->set('SESSION.pet', $roboticPet);
         $f3->reroute('/summary');
     } else {
-        // Display customization options
         $view = new Template();
-        echo $view->render('views/petType.html');
+        echo $view->render('views/robotic.html');
     }
 });
 
-// Summary page to display the final order summary
-$f3->route('GET /summary', function($f3) {
+// Stuffed Pets Page
+$f3->route('GET|POST /stuffed', function($f3) {
 
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Retrieve
+        $size = $f3->get('POST.size');
+        $stuffingType = $f3->get('POST.stuffingType');
+        $material = $f3->get('POST.material');
+
+        // StuffedPet object
+        $stuffedPet = new StuffedPet(
+            $f3->get('SESSION.animal'),
+            $f3->get('SESSION.color'),
+            $size,
+            $stuffingType,
+            $material
+        );
+
+        $f3->set('SESSION.pet', $stuffedPet);
+        $f3->reroute('/summary');
+    } else {
+        $view = new Template();
+        echo $view->render('views/stuffed.html');
+    }
+});
+
+// Summary Page
+$f3->route('GET /summary', function($f3) {
     $pet = $f3->get('SESSION.pet');
     $view = new Template();
     echo $view->render('views/summary.html');
 });
-
 
 // Run Fat-Free
 $f3->run();

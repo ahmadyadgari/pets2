@@ -10,22 +10,18 @@
     <form action="#" method="post">
         <div class="form-group">
             <label for="petType">What kind of pet would you like to order?</label>
-            <input type="text" class="form-control" id="petType" name="petType">
+            <input type="text" class="form-control" id="petType" name="petType" required>
         </div>
         <div class="form-group">
             <label>Pet Type:</label>
             <div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="typeOfPet" id="roboticPet" value="robotic" checked>
-                    <label class="form-check-label" for="roboticPet">
-                        Robotic
-                    </label>
+                    <label class="form-check-label" for="roboticPet">Robotic</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="typeOfPet" id="stuffedPet" value="stuffed">
-                    <label class="form-check-label" for="stuffedPet">
-                        Stuffed
-                    </label>
+                    <label class="form-check-label" for="stuffedPet">Stuffed</label>
                 </div>
             </div>
         </div>
@@ -39,7 +35,7 @@
         </div>
         <div class="form-group">
             <label for="petColor">Select a color:</label>
-            <select class="form-control" id="petColor" name="petColor">
+            <select class="form-control" id="petColor" name="petColor" required>
                 <option>Black</option>
                 <option>White</option>
                 <option>Grey</option>

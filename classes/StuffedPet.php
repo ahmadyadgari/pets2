@@ -1,4 +1,5 @@
 <?php
+
 class StuffedPet extends Pet {
     private $size;
     private $stuffingType;
@@ -22,5 +23,4 @@ class StuffedPet extends Pet {
     public function getMaterial() {
         return $this->material;
     }
-
 }

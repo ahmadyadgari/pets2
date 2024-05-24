@@ -1,5 +1,5 @@
-<!---  328/Week7/pets3/pets2/views/summary.html
-       Author: Ahmad Reshad Yadgari 05/20/2024--->
+<!-- 328/Week7/pets3/pets2/views/summary.html
+       Author: Ahmad Reshad Yadgari 05/20/2024 -->
 
 <!doctype html>
 <html lang="en">
@@ -8,26 +8,22 @@
 <div class="container mt-5">
     <h1>Thank you! Here is the summary of your pet order</h1><br>
     <div>
-        <!-- Ensure that the pet object is actually set in the session -->
         <check if="{{ @SESSION.pet }}">
             <true>
-                <p>Pet Type: {{ @SESSION.pet.getAnimal() }}</p>
-                <p>Pet Color: {{ @SESSION.pet.getColor() }}</p>
-
-                <!-- Check if the pet is a RoboticPet and display accessories if true -->
+                <p>Pet Type: {{ @SESSION.pet->getAnimal() }}</p>
+                <p>Pet Color: {{ @SESSION.pet->getColor() }}</p>
                 <check if="{{ @SESSION.pet instanceof RoboticPet }}">
                     <true>
                         <p>Accessories:
-                            <repeat group="{{ @SESSION.pet.getAccessories() }}" value="{{ @accessory }}" last="{{ @last }}">
+                            <repeat group="{{ @SESSION.pet->getAccessories() }}" value="{{ @accessory }}" last="{{ @last }}">
                                 {{ @accessory }}<check if="{{ !@last }}">,</check>
                             </repeat>
                         </p>
                     </true>
                     <false>
-                        <!-- For StuffedPet, display the size, stuffing type, and material -->
-                        <p>Size: {{ @SESSION.pet.getSize() }}</p>
-                        <p>Stuffing Type: {{ @SESSION.pet.getStuffingType() }}</p>
-                        <p>Material: {{ @SESSION.pet.getMaterial() }}</p>
+                        <p>Size: {{ @SESSION.pet->getSize() }}</p>
+                        <p>Stuffing Type: {{ @SESSION.pet->getStuffingType() }}</p>
+                        <p>Material: {{ @SESSION.pet->getMaterial() }}</p>
                     </false>
                 </check>
             </true>

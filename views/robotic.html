@@ -6,43 +6,41 @@
 <include href="views/header.html"></include>
 <body>
 <div class="container mt-5">
-    <h1>Customize Your Pet</h1>
-    <div class="card-body">
-        <form action="#" method="POST">
-            <div class="form-group">
-                <label>Select Accessories:</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="extra_battery" name="accessories[]" value="extra_battery">
-                    <label class="form-check-label" for="extra_battery">Extra Battery Packs</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="charging_dock" name="accessories[]" value="charging_dock">
-                    <label class="form-check-label" for="charging_dock">Charging Dock/Station</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="voice_module" name="accessories[]" value="voice_module">
-                    <label class="form-check-label" for="voice_module">Voice Module</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="camera_attachment" name="accessories[]" value="camera_attachment">
-                    <label class="form-check-label" for="camera_attachment">Camera Attachment</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="remote_control" name="accessories[]" value="remote_control">
-                    <label class="form-check-label" for="remote_control">Remote Control</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="custom_skins" name="accessories[]" value="custom_skins">
-                    <label class="form-check-label" for="custom_skins">Custom Skins</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="bluetooth_speaker" name="accessories[]" value="bluetooth_speaker">
-                    <label class="form-check-label" for="bluetooth_speaker">Bluetooth Speaker Module</label>
-                </div>
+    <h1>Customize Your Robotic Pet</h1>
+    <form action="#" method="post">
+        <div class="form-group">
+            <label>Select Accessories:</label>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="extra_battery" name="accessories[]" value="Extra Battery Packs">
+                <label class="form-check-label" for="extra_battery">Extra Battery Packs</label>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Place Order</button>
-        </form>
-    </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="charging_dock" name="accessories[]" value="Charging Dock/Station">
+                <label class="form-check-label" for="charging_dock">Charging Dock/Station</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="voice_module" name="accessories[]" value="Voice Module">
+                <label class="form-check-label" for="voice_module">Voice Module</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="camera_attachment" name="accessories[]" value="Camera Attachment">
+                <label class="form-check-label" for="camera_attachment">Camera Attachment</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="remote_control" name="accessories[]" value="Remote Control">
+                <label class="form-check-label" for="remote_control">Remote Control</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="custom_skins" name="accessories[]" value="Custom Skins">
+                <label class="form-check-label" for="custom_skins">Custom Skins</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="bluetooth_speaker" name="accessories[]" value="Bluetooth Speaker Module">
+                <label class="form-check-label" for="bluetooth_speaker">Bluetooth Speaker Module</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Place Order</button>
+    </form>
 </div>
 </body>
 </html>
