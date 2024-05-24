@@ -8,21 +8,31 @@
 <div class="container mt-5">
     <h1>Thank you! Here is the summary of your pet order</h1><br>
     <div>
-        <p>Pet Type: {{ @SESSION.pet->getAnimal() }}</p>
-        <p>Pet Color: {{ @SESSION.pet->getColor() }}</p>
-
-        <check if="{{ @SESSION.pet instanceof RoboticPet }}">
+        <!-- Ensure that the pet object is actually set in the session -->
+        <check if="{{ @SESSION.pet }}">
             <true>
-                <p>Accessories:
-                    <repeat group="{{ @SESSION.pet->getAccessories() }}" value="{{ @accessory }}">
-                        {{ @accessory }},
-                    </repeat>
-                </p>
+                <p>Pet Type: {{ @SESSION.pet.getAnimal() }}</p>
+                <p>Pet Color: {{ @SESSION.pet.getColor() }}</p>
+
+                <!-- Check if the pet is a RoboticPet and display accessories if true -->
+                <check if="{{ @SESSION.pet instanceof RoboticPet }}">
+                    <true>
+                        <p>Accessories:
+                            <repeat group="{{ @SESSION.pet.getAccessories() }}" value="{{ @accessory }}" last="{{ @last }}">
+                                {{ @accessory }}<check if="{{ !@last }}">,</check>
+                            </repeat>
+                        </p>
+                    </true>
+                    <false>
+                        <!-- For StuffedPet, display the size, stuffing type, and material -->
+                        <p>Size: {{ @SESSION.pet.getSize() }}</p>
+                        <p>Stuffing Type: {{ @SESSION.pet.getStuffingType() }}</p>
+                        <p>Material: {{ @SESSION.pet.getMaterial() }}</p>
+                    </false>
+                </check>
             </true>
             <false>
-                <p>Size: {{ @SESSION.pet->getSize() }}</p>
-                <p>Stuffing Type: {{ @SESSION.pet->getStuffingType() }}</p>
-                <p>Material: {{ @SESSION.pet->getMaterial() }}</p>
+                <p>Error: No pet information found in session. Please start your order again.</p>
             </false>
         </check>
     </div>

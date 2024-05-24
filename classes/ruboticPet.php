@@ -7,11 +7,21 @@ class RoboticPet extends Pet {
         $this->accessories = [];
     }
 
-    public function addAccessory($accessory) {
-        $this->accessories[] = $accessory;
-    }
-
+    // Example methods in the RoboticPet class
     public function getAccessories() {
         return $this->accessories;
+    }
+
+// Example methods in the StuffedPet class
+    public function getSize() {
+        return $this->size;
+    }
+
+    public function getStuffingType() {
+        return $this->stuffingType;
+    }
+
+    public function getMaterial() {
+        return $this->material;
     }
 }

@@ -22,4 +22,5 @@ class StuffedPet extends Pet {
     public function getMaterial() {
         return $this->material;
     }
+
 }
